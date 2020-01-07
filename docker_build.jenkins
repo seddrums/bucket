@@ -1,0 +1,21 @@
+#!groovy
+//check test VM properties
+properties([disableConcurrentBuilds()])
+
+pipeline {
+  agent{
+    label 'master'
+  }
+  options {
+    timestamps()
+    buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+  }
+  stages{
+    stage ("create docker image"){
+      steps{
+        dir('docker')
+        sh 'docker build .'
+      }
+    }
+  }
+}
