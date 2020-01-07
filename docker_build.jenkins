@@ -13,8 +13,9 @@ pipeline {
   stages{
     stage ("create docker image"){
       steps{
-        dir ('docker')
-        sh 'docker build .'
+        dir ('docker') {
+          sh 'docker build .'
+        }
       }
     }
   }
