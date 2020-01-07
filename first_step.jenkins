@@ -1,6 +1,6 @@
 #!groovy
 //check test VM properties
-properties([DisableConcurrentBuilds()])
+properties([disableConcurrentBuilds()])
 
 pipeline {
   agent{
