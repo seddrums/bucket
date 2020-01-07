@@ -1,0 +1,20 @@
+#!groovy
+//check test VM properties
+properties([DisableConcurrentBuilds()])
+
+pipeline {
+  agent{
+    label 'master'
+  }
+  options {
+    timestamps()
+    buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+  }
+  stages{
+    stage ("Prepare"){
+      steps{
+        sh 'ssh root@test \'hostname\''
+      }
+    }
+  }
+}
