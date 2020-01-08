@@ -12,11 +12,27 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
   }
   stages{
+    stage ("docker login") {
+      steps {
+        withCredentials ([usernamePassword(credentialsId: 'dockerhub_seddrums', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){
+          sh """
+          docker login -u $USERNAME -p $PASSWORD
+         """
+        }
+      }
+    }
     stage ("create docker image"){
       steps{
         dir ('docker') {
-          sh 'docker build -t bucket:latest .'
+          sh 'docker build -t seddrums/bucket:latest .'
         }
+      }
+    }
+    stage ("push docker image"){
+      steps{        
+          sh '''
+          docker push seddrums/bucket:latest .
+          '''
       }
     }
   }
