@@ -41,3 +41,13 @@
 
 #### 4. Add neighbor members one by one to cluster:
 On alive etcd node:
+
+>etcdctl2 member add master-2 https://192.168.0.9:2380
+
+Added member named master-2 with ID {12415c87c6f0f81} to cluster
+
+>ETCD_NAME="master-2"
+>ETCD_INITIAL_CLUSTER="master-2=https://192.168.0.9:2380,master-1=https://192.168.0.18:2380"
+>ETCD_INITIAL_CLUSTER_STATE="existing"
+
+
