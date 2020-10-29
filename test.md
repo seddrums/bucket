@@ -67,3 +67,5 @@ on master-2 node:
 and wait for two docker containers etcd will be runing
 
 #### 5. Repeat procedure from 4 point to master-3 node
+
+FINISH
