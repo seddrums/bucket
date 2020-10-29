@@ -4,6 +4,7 @@
 > cp -a /var/lib/etcd /var/lib/etcd.back
 >
 >mkdir /etc/origin/node/pods-stopped
+>
 >mv /etc/origin/node/pods/etcd.yaml /etc/origin/node/pods-stopped/
 >
 >systemctl restart origin-node
@@ -12,9 +13,11 @@
 >chown -R etcd.etcd /var/lib/etcd
 >
 >sed -i '/ExecStart/s/"$/ --force-new-cluster"/' /usr/lib/systemd/system/etcd.service;
+>
 >systemctl daemon-reload
 >
 >systemctl restart etcd
+>
 >systemctl show -p SubState -p ActiveState etcd
 >
 >etcdctl --ca-file=/etc/origin/master/master.etcd-ca.crt \
@@ -23,13 +26,17 @@
 >-C https://$(hostname -i):2379 member list
 >
 >sed -i '/ExecStart/s/ --force-new-cluster//g' /usr/lib/systemd/system/etcd.service;
+>
 >systemctl daemon-reload
+>
 >systemctl stop etcd
 >
 >chown -R root.root /etc/etcd
+>
 >chown -R root.root /var/lib/etcd
 >
 >mv /etc/origin/node/pods-stopped/etcd.yaml /etc/origin/node/pods/
+>
 >systemctl restart origin-node
 
 #### 3. Wait for etcd containers are running and check etcd cluster state:
