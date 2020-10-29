@@ -46,16 +46,22 @@ On alive etcd node:
 
 Added member named master-2 with ID {12415c87c6f0f81} to cluster (overwrite this strings to /etc/etcd/etcd.conf)
 
->ETCD_NAME="master-2"
->ETCD_INITIAL_CLUSTER="master-2=https://192.168.0.9:2380,master-1=https://192.168.0.18:2380"
->ETCD_INITIAL_CLUSTER_STATE="existing"
+> ETCD_NAME="master-2"
+>
+> ETCD_INITIAL_CLUSTER="master-2=https://192.168.0.9:2380,master-1=https://192.168.0.18:2380"
+>
+> ETCD_INITIAL_CLUSTER_STATE="existing"
 
 on master-2 node:
 
 >systemctl stop origin-nodedocker ps | grep etcd
+>
 >docker stop {id-of-container-with-etcd}
+>
 >rm -rf /var/lib/etcd/member/*
+>
 >vi /etc/etcd/etcd.conf - set parameters from step on first etcd node
+>
 >systemctl restart origin-node
 
 and wait for two docker containers etcd will be runing
