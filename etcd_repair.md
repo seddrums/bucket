@@ -74,6 +74,6 @@ on master-2 node:
 >
 >systemctl restart origin-node
 
-and wait for two docker containers etcd will be runing
+and wait for two docker containers etcd will be running
 
 #### 5. Repeat procedure from 4 point to master-3 node
