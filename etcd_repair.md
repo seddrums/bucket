@@ -43,15 +43,16 @@
 > etcdctl --ca-file=/etc/origin/master/master.etcd-ca.crt \
 > \> --cert-file=/etc/origin/master/master.etcd-client.crt \
 > \> --key-file=/etc/origin/master/master.etcd-client.key \
-> \> -C https://$(hostname -i):2379 member list 
-> ebae239b1beaf96f: name=master-1 peerURLs=https://192.168.0.18:2380 clientURLs=https://192.168.0.18:2379 isLeader=true
+> \> -C https://$(hostname -i):2379 member list
+>
+> {ID}: name=master-1 peerURLs=https://{master-1-ip}:2380 clientURLs=https://{master-1-ip}:2379 isLeader=true
 
 #### 4. Add neighbor members one by one to cluster:
 On alive etcd node:
 
->etcdctl2 member add master-2 https://192.168.0.9:2380
+>etcdctl2 member add master-2 https://{master-2-ip}:2380
 
-Added member named master-2 with ID {12415c87c6f0f81} to cluster (overwrite this strings to /etc/etcd/etcd.conf)
+Added member named master-2 with ID {ID} to cluster
 
 > ETCD_NAME="master-2"
 >
@@ -61,7 +62,9 @@ Added member named master-2 with ID {12415c87c6f0f81} to cluster (overwrite this
 
 on master-2 node:
 
->systemctl stop origin-nodedocker ps | grep etcd
+>systemctl stop origin-node
+>
+>docker ps | grep etcd
 >
 >docker stop {id-of-container-with-etcd}
 >
