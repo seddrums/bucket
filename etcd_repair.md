@@ -1,4 +1,4 @@
-# How to restore 3.11 OC etcd-cluster
+## How to restore 3.11 OC etcd-cluster
 #### 1. We should define any of etcd nodes to latest version (we can check timestamp on database files)
 #### 2. Make this etcd node as one-member cluster:
 ```
